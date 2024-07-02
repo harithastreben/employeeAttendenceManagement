@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Absent Notification</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 600px;
+			margin: 20px auto;
+			background-color: rgb(229, 229, 229);
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.header {
+			background-color:rgb(229, 229, 229);
+			padding: 10px;
+			border-radius: 8px 8px 0 0;
+			color: rgb(128, 128, 128);
+			text-align: center;
+			position: relative;
+		}
+
+		.header img {
+			height: 50px;
+			position: absolute;
+			left: 20px;
+			top: 10px;
+		}
+
+		.header h1 {
+			margin: 0;
+			padding: 0;
+			font-size: 24px;
+		}
+
+		.content {
+			padding: 20px;
+		}
+
+		.content h1 {
+			color: rgb(128, 128, 255);
+		}
+
+		.content p {
+			color: rgb(0, 0, 64);
+			line-height: 1.6;
+		}
+
+		.footer {
+			text-align: center;
+			font-size: 12px;
+			color: rgb(168, 168, 255);
+			padding-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<!-- Replace 'logo.png' with the actual path to your company logo -->
+			<img src="cid:companyLogo" alt="Company Logo" style="height: 25%; width: 50%;">
+
+			<h1>Employee Absent Notification</h1>
+		</div>
+		<div class="content">
+			<p>Hello <span>{{ employeeName }}</span>,</p>
+			<p>This is to inform you that you were absent today.</p>
+			<p>Thank you.</p>
+		</div>
+		<div class="footer">
+			&copy; 2024 Strebentechnik. All rights reserved.
+		</div>
+	</div>
+</body>
+
+</html>
