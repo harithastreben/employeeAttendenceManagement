@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmailRequest {
-	
-	    private String htmlContent;
-	    private String logoPath;
-	    private String attachmentPath;
+
+	private String htmlContent;
+	private String logoPath;
+	private String attachmentPath;
 
 }

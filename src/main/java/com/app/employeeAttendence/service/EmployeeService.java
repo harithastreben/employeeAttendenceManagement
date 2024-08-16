@@ -39,36 +39,30 @@ public class EmployeeService {
 	@Autowired
 	private EmailRepository emailRepository;
 
-	
-	
 // send email with text message
-    
-    public EmployeeResponse EmployeeAttendence(EmployeeRequest empRequest) {
-        Employee employee = empMapper.toEntity(empRequest);
-        empRepo.save(employee);
-        if (!employee.getIsPresent()) {
-            sendAbsentNotificationMessage(employee);
-        }
-        return empMapper.toResponse(employee);
-    }
 
+	public EmployeeResponse EmployeeAttendence(EmployeeRequest empRequest) {
+		Employee employee = empMapper.toEntity(empRequest);
+		empRepo.save(employee);
+		if (!employee.getIsPresent()) {
+			sendAbsentNotificationMessage(employee);
+		}
+		return empMapper.toResponse(employee);
+	}
 
-    private void sendAbsentNotificationMessage(Employee employee) {
-        String message = employee.getEmployeeName() + " is absent today";
-        emailClient.sendEmailText(message);
-    }
+	private void sendAbsentNotificationMessage(Employee employee) {
+		String message = employee.getEmployeeName() + " is absent today";
+		emailClient.sendEmailText(message);
+	}
 
-    
-    
 // list all employee 
-    
+
 	public List<EmployeeResponse> getAllEmployee() {
 		return empMapper.toResponseDto(empRepo.findAll());
 	}
 
-	
 // get employee by id
-	
+
 	public EmployeeResponse getEmployeeById(@PathVariable @Min(1) Long id) throws EmployeeNotFoundException {
 		Optional<Employee> employeeOptional = empRepo.findById(id);
 		if (!employeeOptional.isPresent()) {
@@ -78,11 +72,11 @@ public class EmployeeService {
 		return empMapper.toResponse(employee);
 	}
 //filter by employee name	
-	
+
 	public List<EmployeeResponse> findByEmployeeName(@PathVariable String employeeName) {
 		return empMapper.toResponseDto(empRepo.findByEmployeeName(employeeName));
 	}
-	
+
 //filter by name and is present
 	public List<EmployeeResponse> findByEmployeeNameandIsPresent(String employeeName, Boolean isPresent) {
 		return empMapper.toResponseDto(empRepo.findByEmployeeNameAndIsPresent(employeeName, isPresent));
@@ -96,10 +90,8 @@ public class EmployeeService {
 		return empMapper.toResponseDto(allEmployees.getContent());
 	}
 
-	
 // email scheduler
-	
-	
+
 	public EmployeeResponse saveEmployeeAttendence(EmployeeRequest empRequest) {
 		Employee employee = empMapper.toEntity(empRequest);
 		empRepo.save(employee);
@@ -120,11 +112,8 @@ public class EmployeeService {
 		return notification;
 	}
 
-	
-	
 //	send mail with attachment
-	
-	
+
 	public EmployeeResponse saveEmployee(EmployeeRequest empRequest) {
 		Employee employee = empMapper.toEntity(empRequest);
 		empRepo.save(employee);
@@ -161,30 +150,30 @@ public class EmployeeService {
 
 	}
 
-	
 //  email with html template	
-	
-	public EmployeeResponse saveEmployeeDetails(EmployeeRequest empRequest) {
-        Employee employee = empMapper.toEntity(empRequest);
-        empRepo.save(employee);
-        if (!employee.getIsPresent()) {
-            sendAbsentNotificationWithTemplate(employee);
-        }
-        return empMapper.toResponse(employee);
-    }
 
-    private void sendAbsentNotificationWithTemplate(Employee employee) {
-        try {
-           // Load HTML template
-            String template = new String(Files.readAllBytes(new ClassPathResource("templates/notification.html").getFile().toPath()));
-           
-            String htmlContent = template.replace("{{ employeeName }}", employee.getEmployeeName());
-            // Send email with HTML content
-            emailClient.sendEmailTemplate(htmlContent);
-        } catch (IOException e) {
-            // Handle exception
-            e.printStackTrace();
-        }
-    }
+	public EmployeeResponse saveEmployeeDetails(EmployeeRequest empRequest) {
+		Employee employee = empMapper.toEntity(empRequest);
+		empRepo.save(employee);
+		if (!employee.getIsPresent()) {
+			sendAbsentNotificationWithTemplate(employee);
+		}
+		return empMapper.toResponse(employee);
+	}
+
+	private void sendAbsentNotificationWithTemplate(Employee employee) {
+		try {
+			// Load HTML template
+			String template = new String(
+					Files.readAllBytes(new ClassPathResource("templates/notification.html").getFile().toPath()));
+
+			String htmlContent = template.replace("{{ employeeName }}", employee.getEmployeeName());
+			// Send email with HTML content
+			emailClient.sendEmailTemplate(htmlContent);
+		} catch (IOException e) {
+			// Handle exception
+			e.printStackTrace();
+		}
+	}
 
 }
