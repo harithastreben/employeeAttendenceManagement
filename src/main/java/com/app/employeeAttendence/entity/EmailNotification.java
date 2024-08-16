@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tbl_email")
 public class EmailNotification {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,11 +28,12 @@ public class EmailNotification {
     private String body;
 
     private boolean issend;
-	@PrePersist
-	protected void onPersist() {
- 
-		issend = false;
-	}
+
+    @PrePersist
+    protected void onPersist() {
+
+        issend = false;
+    }
 
 
 }
